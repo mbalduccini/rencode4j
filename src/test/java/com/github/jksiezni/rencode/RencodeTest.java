@@ -27,7 +27,7 @@ public class RencodeTest {
 	private RencodeInputStream decoder() {
 		final byte[] bytes = byteStream.toByteArray();
 		System.out.println(Arrays.toString(bytes));
-		return new RencodeInputStream(new ByteArrayInputStream(bytes));
+		return new RencodeInputStream(new ByteArrayInputStream(bytes), true);
 	}
 
 	/**
