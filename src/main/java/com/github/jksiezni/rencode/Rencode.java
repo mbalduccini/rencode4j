@@ -6,6 +6,9 @@ package com.github.jksiezni.rencode;
 import java.nio.charset.Charset;
 
 /**
+ * Rencode type codes based on Conelly Barnes source code. 
+ * 
+ * @see {@linkplain http://barnesc.blogspot.com/2006/01/}
  * @author Jakub Księżniak
  *
  */

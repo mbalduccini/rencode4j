@@ -46,6 +46,12 @@ public class RencodeInputStream extends PushbackInputStream implements ObjectInp
 				return Boolean.FALSE;
 			}
 		};
+		decoders[CHR_NONE] = new Decoder<Object>() {
+			@Override
+			public Object decode(int token) throws IOException {
+				return null;
+			}
+		};
 		decoders['0'] = decoders['1'] = decoders['2'] = decoders['3'] = decoders['4'] = decoders['5'] = decoders['6'] = decoders['7'] = decoders['8'] = decoders['9'] = new Decoder<Object>() {
 			@Override
 			public Object decode(int token) throws IOException {

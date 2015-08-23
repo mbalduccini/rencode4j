@@ -139,5 +139,11 @@ public class RencodeTest {
 		assertEquals(map, decoder().readMap());
 		assertEquals(map, decoder().readObject());
 	}
+	
+	@Test
+	public void testNone() throws Exception {
+		rEncode.writeObject(null);
+		assertEquals(null, decoder().readObject());
+	}
 
 }
