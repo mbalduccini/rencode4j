@@ -194,6 +194,7 @@ public class RencodeInputStream extends PushbackInputStream implements ObjectInp
 	@Override
 	public Object readObject() throws IOException {
 		final int token = read();
+		if (token==null) throw new IOException("readObject(): null token");
 		return decoders[token].decode(token);
 	}
 
