@@ -163,7 +163,11 @@ public class RencodeInputStream extends PushbackInputStream implements ObjectInp
 					int count = token - DICT_FIXED_START;
 					final Map<Object, Object> map = new HashMap<>(count, 1);
 					while(count-- > 0) {
-						map.put(readKey(), readObject());
+						try {
+							map.put(readKey(), readObject());
+						}
+						catch (IOException iox)
+						{}
 					}
 					return map;
 				}
