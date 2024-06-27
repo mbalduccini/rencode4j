@@ -20,6 +20,9 @@ import static com.github.jksiezni.rencode.Rencode.*;
  * 
  */
 public class RencodeInputStream extends PushbackInputStream implements ObjectInput {
+	// attempt at resolving runaway calls of readObject() and this decoder
+	private static final int MAX_NESTED_CALLS = 100;
+	private int nestedCallCounter = 0;
 	
 	private interface Decoder<T> {
 		T decode(int token) throws IOException;
@@ -138,9 +141,18 @@ public class RencodeInputStream extends PushbackInputStream implements ObjectInp
   			public List<?> decode(int token) throws IOException {
   				int count = token - LIST_FIXED_START;
   				final List<Object> list = new ArrayList<>(count);
-  				while(count-- > 0) {
-  					list.add(readObject());
-  				}
+				// attempt at resolving runaway calls of readObject() and this decoder
+                    		if (nestedCallCount >= MAX_NESTED_CALLS) {
+                        		throw new StackOverflowError("Maximum nested decode calls exceeded: " + MAX_NESTED_CALLS);
+                    		}
+                    		nestedCallCount++;
+				try {
+					while(count-- > 0) {
+	  					list.add(readObject());
+	  				}
+				} finally {
+                        		nestedCallCount--;
+                    		}
   				return list;
   			}
   		};
