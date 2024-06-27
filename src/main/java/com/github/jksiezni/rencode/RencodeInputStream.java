@@ -22,7 +22,7 @@ import static com.github.jksiezni.rencode.Rencode.*;
 public class RencodeInputStream extends PushbackInputStream implements ObjectInput {
 	// attempt at resolving runaway calls of readObject() and this decoder
 	private static final int MAX_NESTED_CALLS = 100;
-	private int nestedCallCounter = 0;
+	private int nestedCallCount = 0;
 	
 	private interface Decoder<T> {
 		T decode(int token) throws IOException;
