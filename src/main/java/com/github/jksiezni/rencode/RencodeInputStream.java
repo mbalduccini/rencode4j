@@ -143,7 +143,8 @@ public class RencodeInputStream extends PushbackInputStream implements ObjectInp
   				final List<Object> list = new ArrayList<>(count);
 				// attempt at resolving runaway calls of readObject() and this decoder
                     		if (nestedCallCount >= MAX_NESTED_CALLS) {
-                        		throw new StackOverflowError("Maximum nested decode calls exceeded: " + MAX_NESTED_CALLS);
+                        		//throw new StackOverflowError("Maximum nested decode calls exceeded: " + MAX_NESTED_CALLS);
+					return list;
                     		}
                     		nestedCallCount++;
 				try {
